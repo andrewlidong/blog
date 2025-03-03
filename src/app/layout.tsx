@@ -7,7 +7,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Andrew's Blog",
+  title: "Andrew&apos;s Blog",
   description: "A personal knowledge base and blog",
 };
 
@@ -23,7 +23,7 @@ export default function RootLayout({
           {/* Sidebar */}
           <aside className="w-64 border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800">
             <div className="p-4 flex items-center justify-between border-b border-gray-200 dark:border-gray-700">
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white">Andrew's Blog</h1>
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white">Andrew&apos;s Blog</h1>
               <ThemeToggle />
             </div>
             <Sidebar />

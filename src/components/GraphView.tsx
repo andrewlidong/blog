@@ -37,7 +37,6 @@ interface GraphData {
 export default function GraphView() {
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
-  const [notes, setNotes] = useState<Note[]>([]);
   const [graphData, setGraphData] = useState<GraphData>({ nodes: [], links: [] });
   const [isLoading, setIsLoading] = useState(true);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
@@ -60,7 +59,6 @@ export default function GraphView() {
     const loadNotes = async () => {
       try {
         const loadedNotes = await getAllNotes();
-        setNotes(loadedNotes);
 
         // Create a map of valid note slugs
         const validSlugs = new Set(loadedNotes.map(note => note.slug));
@@ -96,7 +94,7 @@ export default function GraphView() {
     loadNotes();
   }, []);
 
-  const handleNodeClick = useCallback((node: any) => {
+  const handleNodeClick = useCallback((node: { id?: string }) => {
     if (node.id) {
       router.push(`/notes/${node.id}`);
     }
@@ -126,12 +124,14 @@ export default function GraphView() {
         backgroundColor="#ffffff"
         width={dimensions.width}
         height={dimensions.height}
-        d3Force={('charge', -100)}
-        d3Force={('center', null)}
-        d3Force={('link', null)}
-        d3Force={('collision', 30)}
-        d3Force={('x', null)}
-        d3Force={('y', null)}
+        d3Force={[
+          ['charge', -100],
+          ['center', null],
+          ['link', null],
+          ['collision', 30],
+          ['x', null],
+          ['y', null]
+        ]}
       />
     </div>
   );

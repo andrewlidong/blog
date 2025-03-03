@@ -3,7 +3,6 @@
 import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
-import { serialize } from 'next-mdx-remote/serialize';
 
 const notesDirectory = path.join(process.cwd(), 'src/content/notes');
 
@@ -78,6 +77,7 @@ export async function getNoteBySlug(slug: string): Promise<Note | null> {
       links,
     };
   } catch (error) {
+    console.error(`Error reading note ${slug}:`, error);
     return null;
   }
 } 

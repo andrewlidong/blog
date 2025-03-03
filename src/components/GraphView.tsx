@@ -1,5 +1,6 @@
 'use client';
 
+// GraphView component for visualizing note connections
 import { useCallback, useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { getAllNotes } from '@/lib/actions';

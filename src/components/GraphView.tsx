@@ -38,7 +38,6 @@ type ForceGraph2DProps = {
   backgroundColor: string;
   width: number;
   height: number;
-  d3Force?: [string, number | null][];
 };
 
 // Dynamically import ForceGraph2D to avoid SSR issues
@@ -150,14 +149,6 @@ export default function GraphView() {
         backgroundColor="#ffffff"
         width={dimensions.width}
         height={dimensions.height}
-        d3Force={([
-          ['charge', -100],
-          ['center', null],
-          ['link', null],
-          ['collision', 30],
-          ['x', null],
-          ['y', null]
-        ] as [string, number | null][])}
       />
     </div>
   );

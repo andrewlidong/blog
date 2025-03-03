@@ -1,20 +1,30 @@
-import Link from 'next/link';
 import { getAllNotes } from '@/lib/actions';
-import Search from '@/components/Search';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
-export default async function Home() {
+interface TagPageProps {
+  params: Promise<{
+    tag: string;
+  }>;
+}
+
+export default async function TagPage({ params }: TagPageProps) {
+  const { tag } = await params;
   const notes = await getAllNotes();
+  const taggedNotes = notes.filter((note) => note.tags.includes(tag));
+
+  if (taggedNotes.length === 0) {
+    notFound();
+  }
 
   return (
     <div className="p-8">
-      {/* Search bar */}
-      <div className="mb-8">
-        <Search notes={notes} />
-      </div>
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+        Notes tagged with #{tag}
+      </h1>
 
-      {/* Notes grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {notes.map((note) => (
+        {taggedNotes.map((note) => (
           <Link
             key={note.slug}
             href={`/notes/${note.slug}`}
@@ -26,21 +36,12 @@ export default async function Home() {
             <p className="text-gray-600 dark:text-gray-300 line-clamp-3">
               {note.content.replace(/[#*`]/g, '').slice(0, 150)}...
             </p>
-            <div className="mt-4 flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
-              <span>{new Date(note.date).toLocaleDateString()}</span>
-              {note.tags.length > 0 && (
-                <span className="flex gap-1">
-                  {note.tags.map((tag) => (
-                    <span key={tag} className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">
-                      #{tag}
-                    </span>
-                  ))}
-                </span>
-              )}
+            <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+              {new Date(note.date).toLocaleDateString()}
             </div>
           </Link>
         ))}
       </div>
     </div>
   );
-}
+} 

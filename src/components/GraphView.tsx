@@ -95,8 +95,17 @@ export default function GraphView() {
     loadNotes();
   }, []);
 
-  const handleNodeClick = useCallback((node: { id?: string }) => {
-    if (node.id) {
+  const handleNodeClick = useCallback((node: { 
+    id?: string | number;
+    x?: number;
+    y?: number;
+    vx?: number;
+    vy?: number;
+    fx?: number;
+    fy?: number;
+    [others: string]: any;
+  }, event: MouseEvent) => {
+    if (node.id && typeof node.id === 'string') {
       router.push(`/notes/${node.id}`);
     }
   }, [router]);

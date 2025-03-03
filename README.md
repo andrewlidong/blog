@@ -14,6 +14,38 @@ Visit the live site at [andrews-garden.vercel.app](https://andrews-garden.vercel
 - 🌓 Dark/Light mode
 - 📱 Responsive design
 
+## TODO
+
+### High Priority
+- [ ] Fix GraphView component TypeScript errors
+- [ ] Add proper error handling for failed note loads
+- [ ] Implement proper loading states for all components
+- [ ] Add SEO meta tags and descriptions
+
+### Medium Priority
+- [ ] Add search functionality
+- [ ] Implement note categories/folders
+- [ ] Add pagination for notes list
+- [ ] Add keyboard shortcuts for navigation
+- [ ] Implement note backlinks view
+- [ ] Add note edit history
+
+### Low Priority
+- [ ] Add RSS feed
+- [ ] Implement note sharing functionality
+- [ ] Add analytics
+- [ ] Add comments system
+- [ ] Implement note export/import
+- [ ] Add custom themes
+- [ ] Add note templates
+
+### Future Ideas
+- [ ] Add AI-powered note suggestions
+- [ ] Implement collaborative editing
+- [ ] Add note version control
+- [ ] Create mobile app version
+- [ ] Add note embedding in other platforms
+
 ## Getting Started
 
 First, run the development server:

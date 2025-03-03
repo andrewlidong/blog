@@ -4,7 +4,7 @@ A personal digital garden and blog built with Next.js, featuring a graph view of
 
 ## Live Demo
 
-Visit the live site at [andrews-garden.vercel.app](https://andrews-garden.vercel.app)
+Visit the live site at [blog-theta-eight-11.vercel.app](https://blog-theta-eight-11.vercel.app)
 
 ## Features
 

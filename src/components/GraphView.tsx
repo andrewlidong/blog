@@ -32,7 +32,7 @@ type ForceGraph2DProps = {
   nodeLabel: string;
   nodeAutoColorBy: string;
   linkColor: string;
-  onNodeClick: (node: any, event: MouseEvent) => void;
+  onNodeClick: (node: { id?: string | number }, _event: MouseEvent) => void;
   nodeRelSize: number;
   linkWidth: number;
   backgroundColor: string;
@@ -110,16 +110,7 @@ export default function GraphView() {
     loadNotes();
   }, []);
 
-  const handleNodeClick = useCallback((node: { 
-    id?: string | number;
-    x?: number;
-    y?: number;
-    vx?: number;
-    vy?: number;
-    fx?: number;
-    fy?: number;
-    [others: string]: any;
-  }, event: MouseEvent) => {
+  const handleNodeClick = useCallback((node: { id?: string | number }, _event: MouseEvent) => {
     if (node.id && typeof node.id === 'string') {
       router.push(`/notes/${node.id}`);
     }

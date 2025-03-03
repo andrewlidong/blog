@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import { getAllNotes, Note } from '@/lib/actions';
+import { getAllNotes } from '@/lib/actions';
 import { useRouter } from 'next/navigation';
 
 // Dynamically import ForceGraph2D to avoid SSR issues

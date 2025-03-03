@@ -6,16 +6,7 @@ import dynamic from 'next/dynamic';
 import { getAllNotes } from '@/lib/actions';
 import { useRouter } from 'next/navigation';
 
-// Dynamically import ForceGraph2D to avoid SSR issues
-const ForceGraph2D = dynamic(() => import('react-force-graph-2d'), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-[600px] flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-      <div className="text-gray-600 dark:text-gray-400">Loading graph...</div>
-    </div>
-  ),
-});
-
+// Define types for the graph
 interface Node {
   id: string;
   name: string;
@@ -34,6 +25,31 @@ interface GraphData {
   nodes: Node[];
   links: Link[];
 }
+
+// Define ForceGraph2D props type
+type ForceGraph2DProps = {
+  graphData: GraphData;
+  nodeLabel: string;
+  nodeAutoColorBy: string;
+  linkColor: string;
+  onNodeClick: (node: any, event: MouseEvent) => void;
+  nodeRelSize: number;
+  linkWidth: number;
+  backgroundColor: string;
+  width: number;
+  height: number;
+  d3Force?: [string, number | null][];
+};
+
+// Dynamically import ForceGraph2D to avoid SSR issues
+const ForceGraph2D = dynamic(() => import('react-force-graph-2d'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[600px] flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+      <div className="text-gray-600 dark:text-gray-400">Loading graph...</div>
+    </div>
+  ),
+}) as React.ComponentType<ForceGraph2DProps>;
 
 export default function GraphView() {
   const router = useRouter();
@@ -134,14 +150,14 @@ export default function GraphView() {
         backgroundColor="#ffffff"
         width={dimensions.width}
         height={dimensions.height}
-        d3Force={[
+        d3Force={([
           ['charge', -100],
           ['center', null],
           ['link', null],
           ['collision', 30],
           ['x', null],
           ['y', null]
-        ]}
+        ] as [string, number | null][])}
       />
     </div>
   );
